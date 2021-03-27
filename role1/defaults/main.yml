@@ -1,0 +1,5 @@
+---
+# defaults file for role1
+
+centos_hostname: testhostname1
+ubuntu_hostname: testhostname1

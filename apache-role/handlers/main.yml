@@ -1,0 +1,7 @@
+---
+# handlers file for nginx-role
+- name: Start Apache 
+  systemd:
+    name: httpd
+    state: started
+  

@@ -1,0 +1,5 @@
+---
+# vars file for role1
+
+centos_hostname: centostest2
+ubuntu_hostname: ubuntutest2

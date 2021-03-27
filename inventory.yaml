@@ -1,0 +1,9 @@
+all: 
+  hosts:
+  children:
+    dev:
+      hosts:
+        centos7:
+          ansible_host: 134.122.24.207
+        ubuntu18:
+          ansible_host: 142.93.250.103
