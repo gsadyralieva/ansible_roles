@@ -1,0 +1,49 @@
+---
+# tasks file for security_patch
+- name: list security updates 
+  command: yum check-update --security
+  register: result
+  when:
+    - ansible_facts['distribution'] == "RedHat"  or
+      ansible_facts['distribution'] == "CentOS" 
+
+- name: Show Output
+  debug: 
+    msg: "{{ result }}"
+  when:
+    - ansible_facts['distribution'] == "RedHat"  or
+      ansible_facts['distribution'] == "CentOS"
+   
+- name: Install security updates
+  command: yum -y update --security
+  when:
+    - ansible_facts['distribution'] == "RedHat"  or
+      ansible_facts['distribution'] == "CentOS" 
+
+- name: Make a copy of security repos
+  shell: cat /etc/apt/sources.list|grep secu >/etc/apt/security.sources.list
+  when:
+    - ansible_facts['distribution'] == "Ubuntu" or
+      ansible_facts['distribution'] == "Debian" 
+
+
+- name: Ubuntu list updates
+  shell: apt list --upgradable 
+  when:
+    - ansible_facts['distribution'] == "Ubuntu"  or
+      ansible_facts['distribution'] == "Debian" 
+  register: result
+
+- name: Show Output
+  debug: 
+    msg: "{{ result }}"
+  when:
+    - ansible_facts['distribution'] == "Ubuntu"  or
+      ansible_facts['distribution'] == "Debian"
+
+
+- name: Ubuntu - Install the security updates
+  shell: apt-get update && apt-get upgrade -o Dir::Etc::SourceList=/etc/apt/security.sources.list
+  when:
+    - ansible_facts['distribution'] == "Ubuntu" or
+      ansible_facts['distribution'] == "Debian" 

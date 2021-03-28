@@ -7,3 +7,5 @@ all:
           ansible_host: 134.122.24.207
         ubuntu18:
           ansible_host: 142.93.250.103
+        ubuntu-host2:
+          ansible_host: 134.122.21.14
